@@ -1,0 +1,22 @@
+{
+    "name": "jackal/lighthouse-client",
+    "type": "library",
+    "require": {
+        "symfony/process": "^4.3",
+        "symfony/options-resolver": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jackal\\Lighthouse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luca",
+            "email": "luca.giacalone@edimotive.com"
+        }
+    ],
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15"
+    }
+}
