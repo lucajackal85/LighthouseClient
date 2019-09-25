@@ -27,7 +27,7 @@ class LighthouseClient
         $this->lighthouse = $this->getLighthousePath();
     }
 
-    public function authenticate($user, $password)
+    public function addBasicAuthorization($user, $password)
     {
         $this->options['headers']['authorization'] = sprintf('Basic %s', base64_encode($user.':'.$password));
     }
