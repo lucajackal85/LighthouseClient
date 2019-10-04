@@ -43,7 +43,7 @@ class LighthouseClient
         $headers = addcslashes(json_encode($this->options['headers']), '"');
 
         $options =[
-            $this->options['interactive'] ? '' : '--chrome-flags="--headless"',
+            $this->options['interactive'] ? '' : '--chrome-flags="--headless --no-sandbox"',
             $this->options['path'] ? '--output='.$this->options['output'] : '--output=json',
             $this->options['path'] ? '--output-path='.$this->options['path'] : '--output-path='.$tempOutput,
             $this->options['headers'] ? '--extra-headers="'.$headers.'"' : ''
