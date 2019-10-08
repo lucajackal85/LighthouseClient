@@ -51,6 +51,7 @@ class LighthouseClient
 
         $command = sprintf('%s %s %s', $this->lighthouse, $url, implode(' ', $options));
         $process = new Process($command);
+        $process->setTimeout(3600);
         $process->run();
         if (!$process->isSuccessful()) {
             throw new RuntimeException(sprintf('<error>%s</error>', $process->getErrorOutput()));
