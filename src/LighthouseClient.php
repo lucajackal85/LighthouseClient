@@ -3,6 +3,7 @@
 
 namespace Jackal\Lighthouse;
 
+use Jackal\BinLocator\BinLocator;
 use Jackal\Lighthouse\Result\Result;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\RuntimeException;
@@ -68,8 +69,7 @@ class LighthouseClient
 
     protected function getLighthousePath()
     {
-        $process = new Process('which lighthouse');
-        $process->run();
-        return trim($process->getOutput());
+        $binLocator = new BinLocator('lighthouse');
+        return $binLocator->locate();
     }
 }

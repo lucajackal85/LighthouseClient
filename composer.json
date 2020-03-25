@@ -2,12 +2,14 @@
     "name": "jackal/lighthouse-client",
     "type": "library",
     "require": {
-        "symfony/process": "^4.3",
-        "symfony/options-resolver": "^4.3"
+        "php": ">=7.1",
+        "symfony/options-resolver": "^3.4",
+        "jackal/bin-locator": "^0.2"
     },
     "autoload": {
         "psr-4": {
-            "Jackal\\Lighthouse\\": "src/"
+            "Jackal\\Lighthouse\\": "src/",
+            "Jackal\\Lighthouse\\Test\\": "tests/"
         }
     },
     "authors": [
