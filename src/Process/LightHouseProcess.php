@@ -64,7 +64,7 @@ class LightHouseProcess
         $command = $this->getShellCommand($url);
 
         //compatibility fix Process >= 5.x
-        if(method_exists(Process::class,'fromShellCommandline')){
+        if(method_exists(Process::class, 'fromShellCommandline')){
           return Process::fromShellCommandline($command);
         }
 
