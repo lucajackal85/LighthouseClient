@@ -32,6 +32,7 @@ class LighthouseClient
 
         $result = new Result(json_decode(file_get_contents($this->lighthouseProcess->getOutputPath()), true));
         $this->clearFiles();
+
         return $result;
     }
 

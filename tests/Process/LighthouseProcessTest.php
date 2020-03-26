@@ -48,7 +48,7 @@ class LighthouseProcessTest extends TestCase
         $process = new LightHouseProcess([
            'path' => __DIR__ . '/unittest.json',
            'username' => 'user',
-           'password' => 'pwd'
+           'password' => 'pwd',
         ]);
 
         $this->assertEquals($this->getLightousePath() . ' http://localhost/ --chrome-flags="--headless --no-sandbox" --output=json --output-path=' . __DIR__ . '/unittest.json --extra-headers="{\"authorization\":\"Basic dXNlcjpwd2Q=\"}"',

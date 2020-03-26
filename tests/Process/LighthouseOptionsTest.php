@@ -31,10 +31,10 @@ class LighthouseOptionsTest extends TestCase
     public function testBasicAuthenticationOption(){
         $process = new LightHouseProcess([
             'username' => 'user',
-            'password' => 'pwd'
+            'password' => 'pwd',
         ]);
 
-        $this->assertEquals('user',$process->getUsername());
-        $this->assertEquals('pwd',$process->getPassword());
+        $this->assertEquals('user', $process->getUsername());
+        $this->assertEquals('pwd', $process->getPassword());
     }
 }
