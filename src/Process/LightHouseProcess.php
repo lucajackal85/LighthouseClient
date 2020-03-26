@@ -16,7 +16,7 @@ class LightHouseProcess
         $resolver->setDefaults([
             'interactive' => false,
             'output' => 'json',
-            'path' => sys_get_temp_dir() . '/' . uniqid() . '.' . $this->options['output'],
+            'path' => sys_get_temp_dir() . '/' . uniqid() . '.json',
             'username' => null,
             'password' => null,
         ]);
