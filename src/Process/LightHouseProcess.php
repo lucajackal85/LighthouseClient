@@ -9,7 +9,6 @@ use Symfony\Component\Process\Process;
 class LightHouseProcess
 {
     protected $options;
-    protected $lighthouse;
 
     public function __construct(array $options = [])
     {
@@ -18,7 +17,6 @@ class LightHouseProcess
             'interactive' => false,
             'output' => 'json',
             'path' => sys_get_temp_dir() . '/' . uniqid() . '.' . $this->options['output'],
-
             'username' => null,
             'password' => null,
         ]);
@@ -27,7 +25,6 @@ class LightHouseProcess
             'json','html',
         ]);
         $this->options = $resolver->resolve($options);
-        $this->lighthouse = $this->getLighthousePath();
     }
 
     protected function getBasicAuth() : ?string
@@ -43,8 +40,8 @@ class LightHouseProcess
         $headers = addcslashes(json_encode(['authorization' => $this->getBasicAuth()]), '"');
 
         $options = [
-            $this->options['interactive'] ? '' : '--chrome-flags="--headless --no-sandbox"',
-            $this->options['path'] ? '--output=' . $this->options['output'] : '--output=json',
+            $this->isInteractive() ? '' : '--chrome-flags="--headless --no-sandbox"',
+            $this->getOutputPath() ? '--output=' . $this->getOutputType() : '--output=json',
             '--output-path=' . $this->getOutputPath(),
             $this->getBasicAuth() ? '--extra-headers="' . $headers . '"' : '',
         ];
@@ -57,21 +54,15 @@ class LightHouseProcess
             return $options;
         }, []);
 
-        return array_merge([$url],$options);
+        return array_merge([$url], $options);
     }
 
     public function getProcess($url) : Process{
 
         $binLocator = new BinLocator('lighthouse');
+
         return $binLocator->getProcess($this->getShellCommand($url));
 
-    }
-
-    protected function getLighthousePath() : string
-    {
-        $binLocator = new BinLocator('lighthouse');
-
-        return $binLocator->locate();
     }
 
     public function getOutputPath(){
