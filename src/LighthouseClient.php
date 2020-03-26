@@ -2,12 +2,9 @@
 
 namespace Jackal\Lighthouse;
 
-use Jackal\BinLocator\BinLocator;
 use Jackal\Lighthouse\Process\LightHouseProcess;
 use Jackal\Lighthouse\Result\Result;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\RuntimeException;
-use Symfony\Component\Process\Process;
 
 class LighthouseClient
 {

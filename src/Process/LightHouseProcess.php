@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Jackal\Lighthouse\Process;
-
 
 use Jackal\BinLocator\BinLocator;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,10 +20,10 @@ class LightHouseProcess
             'path' => sys_get_temp_dir() . '/' . uniqid() . '.' . $this->options['output'],
 
             'username' => null,
-            'password' => null
+            'password' => null,
         ]);
 
-        $resolver->setAllowedValues('output',[
+        $resolver->setAllowedValues('output', [
             'json','html',
         ]);
         $this->options = $resolver->resolve($options);
@@ -51,12 +49,13 @@ class LightHouseProcess
             $this->getBasicAuth() ? '--extra-headers="' . $headers . '"' : '',
         ];
 
-        $options = array_reduce($options,function ($options,$currOption){
+        $options = array_reduce($options, function ($options, $currOption){
             if($currOption != ''){
                 $options[] = $currOption;
             }
+
             return $options;
-        },[]);
+        }, []);
 
         return sprintf('%s %s %s', $this->lighthouse, $url, implode(' ', $options));
     }
@@ -66,7 +65,6 @@ class LightHouseProcess
 
         return new Process($command);
     }
-
 
     protected function getLighthousePath() : string
     {

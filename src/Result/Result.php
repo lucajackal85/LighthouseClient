@@ -34,7 +34,7 @@ class Result
         ]);
 
         foreach (array_keys($response) as $key){
-            $options->setDefault($key,null);
+            $options->setDefault($key, null);
         }
 
         $this->response = $options->resolve($response);

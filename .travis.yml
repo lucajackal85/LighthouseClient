@@ -1,3 +1,6 @@
+sudo: required
+dist: trusty
+
 language: php
 
 php:
@@ -7,6 +10,14 @@ php:
 
 install:
   - composer install
+  - npm install -g lighthouse
+
+env:
+  - NODE_RELEASE=10.x
+
+before_install:
+  - sudo rm -rf ~/.nvm - curl -sL "https://deb.nodesource.com/setup_${NODE_RELEASE}" | sudo -E bash -
+  - sudo apt-get install -y nodejs
 
 script:
   - vendor/bin/phpunit tests/

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Jackal\Lighthouse\Test\Process;
-
 
 use Jackal\Lighthouse\Process\LightHouseProcess;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +13,7 @@ class LighthouseOptionsTest extends TestCase
 
         $this->assertNull($process->getUsername());
         $this->assertNull($process->getPassword());
-        $this->assertEquals('json',$process->getOutputType());
+        $this->assertEquals('json', $process->getOutputType());
         $this->assertTrue(is_dir(dirname($process->getOutputPath())));
         $this->assertFalse($process->isInteractive());
     }
@@ -26,7 +24,7 @@ class LighthouseOptionsTest extends TestCase
         $this->expectExceptionMessage('The option "output" with value "invalid" is invalid. Accepted values are: "json", "html".');
 
         new LightHouseProcess([
-            'output' => 'invalid'
+            'output' => 'invalid',
         ]);
     }
 }
