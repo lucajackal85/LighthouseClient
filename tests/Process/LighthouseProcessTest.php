@@ -16,7 +16,7 @@ class LighthouseProcessTest extends TestCase
             'path' => __DIR__ . '/unittest.json',
         ]);
 
-        $this->assertEquals($this->getLightousePath().' http://localhost/ --chrome-flags="--headless --no-sandbox" --output=json --output-path=' . __DIR__ . '/unittest.json',
+        $this->assertEquals($this->getLightousePath() . ' http://localhost/ --chrome-flags="--headless --no-sandbox" --output=json --output-path=' . __DIR__ . '/unittest.json',
             $process->getProcess('http://localhost/')->getCommandLine()
         );
     }
@@ -27,7 +27,7 @@ class LighthouseProcessTest extends TestCase
             'interactive' => true,
         ]);
 
-        $this->assertEquals($this->getLightousePath().' http://localhost/ --output=json --output-path=' . __DIR__ . '/unittest.json',
+        $this->assertEquals($this->getLightousePath() . ' http://localhost/ --output=json --output-path=' . __DIR__ . '/unittest.json',
             $process->getProcess('http://localhost/')->getCommandLine()
         );
     }
@@ -39,7 +39,7 @@ class LighthouseProcessTest extends TestCase
             'output' => 'html',
         ]);
 
-        $this->assertEquals($this->getLightousePath().' http://localhost/ --output=html --output-path=' . __DIR__ . '/unittest.html',
+        $this->assertEquals($this->getLightousePath() . ' http://localhost/ --output=html --output-path=' . __DIR__ . '/unittest.html',
             $process->getProcess('http://localhost/')->getCommandLine()
         );
     }
