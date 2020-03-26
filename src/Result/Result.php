@@ -1,48 +1,102 @@
 <?php
 
-
 namespace Jackal\Lighthouse\Result;
+
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Result
 {
     protected $response;
+
     public function __construct(array $response)
     {
         $this->response = $response;
+
+        $options = new OptionsResolver();
+        $options->setDefaults([
+            'categories' => [
+                'performance' => [
+                    'score' => null,
+                ],
+                'accessibility' => [
+                    'score' => null,
+                ],
+                'best-practices' => [
+                    'score' => null,
+                ],
+                'seo' => [
+                    'score' => null,
+                ],
+                'pwa' => [
+                    'score' => null,
+                ],
+            ],
+        ]);
+
+        foreach (array_keys($response) as $key){
+            $options->setDefault($key,null);
+        }
+
+        $this->response = $options->resolve($response);
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return json_encode($this->response);
     }
 
-    public function getRawData()
+    public function getRawData() : array
     {
         return $this->response;
     }
 
-    public function getPerformance()
+    public function getPerformance() : ?int
     {
-        return $this->response['categories']['performance']['score'] * 100;
+        $value = $this->response['categories']['performance']['score'];
+        if(!$value){
+            return $value;
+        }
+
+        return $value * 100;
     }
 
-    public function getAccessibility()
+    public function getAccessibility() : ?int
     {
-        return $this->response['categories']['accessibility']['score'] * 100;
+        $value = $this->response['categories']['accessibility']['score'];
+        if(!$value){
+            return $value;
+        }
+
+        return $value * 100;
     }
 
-    public function getBestPractices()
+    public function getBestPractices() : ?int
     {
-        return $this->response['categories']['best-practices']['score'] * 100;
+        $value = $this->response['categories']['best-practices']['score'];
+        if(!$value){
+            return $value;
+        }
+
+        return $value * 100;
     }
 
-    public function getSEO()
+    public function getSEO() : ?int
     {
-        return $this->response['categories']['seo']['score'] * 100;
+        $value = $this->response['categories']['seo']['score'];
+        if(!$value){
+            return $value;
+        }
+
+        return $value * 100;
     }
 
-    public function getProgressiveWebApp()
+    public function getProgressiveWebApp() : ?int
     {
-        return $this->response['categories']['pwa']['score'] * 100;
+        $value = $this->response['categories']['pwa']['score'];
+        if(!$value){
+            return $value;
+        }
+
+        return $value * 100;
     }
 }
