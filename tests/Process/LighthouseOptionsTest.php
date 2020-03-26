@@ -27,4 +27,14 @@ class LighthouseOptionsTest extends TestCase
             'output' => 'invalid',
         ]);
     }
+
+    public function testBasicAuthenticationOption(){
+        $process = new LightHouseProcess([
+            'username' => 'user',
+            'password' => 'pwd'
+        ]);
+
+        $this->assertEquals('user',$process->getUsername());
+        $this->assertEquals('pwd',$process->getPassword());
+    }
 }

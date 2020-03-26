@@ -8,8 +8,13 @@ use Symfony\Component\Process\Process;
 
 class LightHouseProcess
 {
+    /** @var array $options */
     protected $options;
 
+    /**
+     * LightHouseProcess constructor.
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
@@ -24,9 +29,13 @@ class LightHouseProcess
         $resolver->setAllowedValues('output', [
             'json','html',
         ]);
+
         $this->options = $resolver->resolve($options);
     }
 
+    /**
+     * @return string|null
+     */
     protected function getBasicAuth() : ?string
     {
         if($this->getUsername() and $this->getPassword()) {
@@ -36,7 +45,11 @@ class LightHouseProcess
         return null;
     }
 
-    protected function getShellCommand($url) {
+    /**
+     * @param $url
+     * @return array
+     */
+    protected function getShellCommand($url) : array {
         $headers = addcslashes(json_encode(['authorization' => $this->getBasicAuth()]), '"');
 
         $options = [
@@ -57,6 +70,10 @@ class LightHouseProcess
         return array_merge([$url], $options);
     }
 
+    /**
+     * @param $url
+     * @return Process
+     */
     public function getProcess($url) : Process{
 
         $binLocator = new BinLocator('lighthouse');
@@ -65,23 +82,38 @@ class LightHouseProcess
 
     }
 
-    public function getOutputPath(){
+    /**
+     * @return string
+     */
+    public function getOutputPath() : string {
         return $this->options['path'];
     }
 
-    public function getOutputType(){
+    /**
+     * @return string
+     */
+    public function getOutputType() : string {
         return $this->options['output'];
     }
 
-    public function isInteractive(){
+    /**
+     * @return bool
+     */
+    public function isInteractive() : bool {
         return $this->options['interactive'] == true;
     }
 
-    public function getUsername(){
+    /**
+     * @return string|null
+     */
+    public function getUsername() : ?string {
         return $this->options['username'];
     }
 
-    public function getPassword(){
+    /**
+     * @return string|null
+     */
+    public function getPassword() : ?string {
         return $this->options['password'];
     }
 }
