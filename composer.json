@@ -10,7 +10,7 @@
     "require": {
         "php": ">=7.1",
         "symfony/options-resolver": "^3.4",
-        "jackal/bin-locator": "^0.3",
+        "jackal/bin-locator": "^0.4",
         "ext-json": "*",
         "symfony/process": ">=3.4"
     },

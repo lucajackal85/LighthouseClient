@@ -57,19 +57,14 @@ class LightHouseProcess
             return $options;
         }, []);
 
-        return sprintf('%s %s %s', $this->lighthouse, $url, implode(' ', $options));
+        return array_merge([$url],$options);
     }
 
     public function getProcess($url) : Process{
-        $command = $this->getShellCommand($url);
 
-        //compatibility fix Process >= 5.x
-        if(method_exists(Process::class, 'fromShellCommandline')){
-          return Process::fromShellCommandline($command);
-        }
+        $binLocator = new BinLocator('lighthouse');
+        return $binLocator->getProcess($this->getShellCommand($url));
 
-        //Process < 5.x
-        return new Process($command);
     }
 
     protected function getLighthousePath() : string
